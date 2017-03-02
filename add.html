@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>增加数据</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/add.css">
+</head>
+
+<body>
+    <div class="container my-form">
+        <h1 class="text-center"><small>借书登记</small></h1>
+        <form>
+            <div class="form-group">
+                <label for="bookname">图书名称:</label>
+                <input type="text" class="form-control" name="book" id="bookname" placeholder="请输入图书名称">
+            </div>
+            <div class="form-group">
+                <label for="codenumber">图书编号:</label>
+                <input type="text" class="form-control" name="code" id="codenumber" placeholder="请输入图书编号">
+            </div>
+            <div class="form-group">
+                <label for="borrower">借书人:</label>
+                <input type="text" class="form-control" name="borrower" id="borrower" placeholder="请输入借书人姓名">
+            </div>
+            <div class="form-group">
+                <label for="contact">联系方式:</label>
+                <input type="text" class="form-control" name="contact" id="contact" placeholder="请输入借书人联系方式">
+            </div>
+            <div class="form-group"><label for="more">备注</label></div>
+            <textarea name="more" id="more" cols="30" rows="10" class="form-control"></textarea>
+            <button type="submit" class="btn btn-info my-button" id="my-sub">确认</button>
+            <button type="reset" class="btn btn-info my-button">取消</button>
+        </form>
+    </div>
+</body>
+<script src="http://cdn.bootcss.com/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/add.js"></script>
+
+</html>

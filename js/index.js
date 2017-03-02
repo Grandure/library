@@ -10,8 +10,8 @@ function searchPage(setPage){  //查询页面 若输入参数为设置页面，�
 	return currentPage;
 }
 
- function compusePage(itemTotal){ //计算当前显示的页数:pageNum表示页数，itemTotal表示数据库内容总数
- 		var pageNum = searchPage();
+function compusePage(itemTotal){ //计算当前显示的页数:pageNum表示页数，itemTotal表示数据库内容总数
+ 		var pageNum = searchPage(); //从Ajax获取数据库内容 searchPage参数需要增加获取的值;
 		var result = itemTotal / pageNum;
 		//searchPage(); //查询当前设置页数
 		if(itemTotal % pageNum !== 0){
@@ -23,3 +23,11 @@ function searchPage(setPage){  //查询页面 若输入参数为设置页面，�
 		pageNum = parseInt(result,10);
 		console.log('当前分页数为:' + '' + pageNum);
 }
+
+function showPage(){
+	
+}
+$(document).ready(function() {
+	$('tr>th').addClass('bg-info');
+	$('tr:even').addClass('success');
+});
