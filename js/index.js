@@ -10,16 +10,16 @@ function searchPage(setPage){  //查询页面 若输入参数为设置页面，�
 	return currentPage;
 }
 
-// $(document).ready(function() {
-// 	console.log($('#my-page').val());
-// 	$('#my-page').change(function(event) {
-// 			alert($(this).val());		
-// 	});
-// });
-
-
-function showContent(num){ //显示页面
-	function compusePage(){ //计算当前显示的页数
-
-	}
+ function compusePage(itemTotal){ //计算当前显示的页数:pageNum表示页数，itemTotal表示数据库内容总数
+ 		var pageNum = searchPage();
+		var result = itemTotal / pageNum;
+		//searchPage(); //查询当前设置页数
+		if(itemTotal % pageNum !== 0){
+			result = result + 1;
+		}
+		if(result <= 1) {
+			pageNum = 1;
+		}
+		pageNum = parseInt(result,10);
+		console.log('当前分页数为:' + '' + pageNum);
 }
