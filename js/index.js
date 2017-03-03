@@ -27,7 +27,42 @@ function compusePage(itemTotal){ //计算当前显示的页数:pageNum表示页�
 function showPage(){
 	
 }
-$(document).ready(function() {
-	$('tr>th').addClass('bg-info');
-	$('tr:even').addClass('success');
-});
+// $(document).ready(function() {
+// 	function loaddata() {
+//         $.ajax({
+//             url: '../data/index.php',
+//             type: 'get',
+//             dataType: 'json',
+//             data: {},
+//             success: function(res) {
+//                 console.log(res);
+//                 var result = res;
+//                 var _html = "";
+//                 for (var i = 0; i < res.length; i++) {
+//                     _html += "<tr><td>" + "<input type='checkbox'/>" + "<span>" + res[i]['id'] + "</span>" + "\
+//                     </td>/<td>" + res[i]['book'] + "</td>\
+//                     <td>" + res[i]['code'] + "</td>\
+//                     <td>" + res[i]['borrower'] + "</td>\
+//                     <td>" + res[i]['contact'] + "</td>\
+//                     <td>" + res[i]['more'] + "</td>\</tr>";
+//                 }
+//                 // _html += "</table><a href='add.html'>新增图书</a>";
+//                 setTimeout(function() {
+//                     $('#list-book').html(_html);
+//                 }, 930)
+//             },
+//             error: function() {
+//                 alert("erro!");
+//             }
+//         });
+//     }
+//     loaddata();
+// });
+$(document).ready(function(){
+    alert("erro");
+}) 
+
+// $(document).ready(function() {
+// 	$('tr>th').addClass('bg-info');
+// 	$('tr:even').addClass('success');
+// });
