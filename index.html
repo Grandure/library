@@ -23,109 +23,14 @@
                     <th>备注</th>
                 </tr>
             </thead>
-            <tbody id="list-book"><!-- 
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>1</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>2</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>3</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>4</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>5</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>6</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>7</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>8</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>9</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox"><span>10</span></td>
-                    <td>《三国演义》</td>
-                    <td>78-809P</td>
-                    <td>王三</td>
-                    <td>1399863XXXX</td>
-                    <td>这个人很懒!</td>
-                </tr> -->
+            <tbody id="list-book">
             </tbody>
             <tfoot></tfoot>
         </table>
         <nav aria-label="..." class="text-center">
-            <ul class="pager ">
-                <li><a href="">Previous</a></li>
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li><a href="">Next</a></li>
+            <ul class="pager">
+                <li><a href="" id="Pre">Previous</a></li>
+                <li><a href="" id="Nex">Next</a></li>
                 <span>每页</span>
                 <select name="" id="my-page">
                     <option value="10">10</option>
@@ -135,6 +40,7 @@
                     <option value="50">50</option>
                 </select>
                 <span>条</span>
+                <span id="item-total"></span>
             </ul>
         </nav>
     </div>

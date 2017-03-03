@@ -1,68 +1,95 @@
+function showPage() {}
+$(document).ready(function() {
+    function list(Pages, res) { //获取数据库内容并显示出来
+        var _list = ""; //存储列表临时变量
+        var _page = ""; //存储页面临时变量
+        var compuse;
+        for (var i = 0; i < Pages; i++) {
+            _list += "<tr><td>" + "<input type='checkbox'/>" + "<span>" + res[i]['id'] + "</span>" + "\
+                    </td>/<td>" + res[i]['book'] + "</td>\
+                    <td>" + res[i]['code'] + "</td>\
+                    <td>" + res[i]['borrower'] + "</td>\
+                    <td>" + res[i]['tel'] + "</td>\
+                    <td>" + res[i]['more'] + "</td>\</tr>";
 
+        }
+        if (res.length % Pages != 0) {
+            compuse = res.length / Pages + 1;
+        } else {
+            compuse = res.length / Pages
+        }
+        if (res.length <= 1) {
+            compuse = 1;
+        }
+        compuse = parseInt(compuse, 10);
+        for (var i = 1; i <= compuse; i++) {
+            $('#Nex').parent().before('<li><a href="">' + i + '</a></li>');
+        }
+        console.log('当前数据页数为:' + ' ' + compuse);
+        (function() {
 
-function searchPage(setPage){  //查询页面 若输入参数为设置页面，若参数为空为查询页面
-	var getPage = document.getElementById('my-page');
-	currentPage = parseInt(getPage.value);
-	if(arguments.length == 0){
-		return currentPage
-	}
-	currentPage = setPage;
-	return currentPage;
-}
+            $('#list-book').html(_list);
 
-function compusePage(itemTotal){ //计算当前显示的页数:pageNum表示页数，itemTotal表示数据库内容总数
- 		var pageNum = searchPage(); //从Ajax获取数据库内容 searchPage参数需要增加获取的值;
-		var result = itemTotal / pageNum;
-		//searchPage(); //查询当前设置页数
-		if(itemTotal % pageNum !== 0){
-			result = result + 1;
-		}
-		if(result <= 1) {
-			pageNum = 1;
-		}
-		pageNum = parseInt(result,10);
-		console.log('当前分页数为:' + '' + pageNum);
-}
+            $('#item-total').html('共含有' + "<span id='dataNumber'>" + res.length + '</span>' + ' ' + '条数据');
+        })();
+        $('#Pre').after(_page);
+    }
 
-function showPage(){
-	
-}
-// $(document).ready(function() {
-// 	function loaddata() {
-//         $.ajax({
-//             url: '../data/index.php',
-//             type: 'get',
-//             dataType: 'json',
-//             data: {},
-//             success: function(res) {
-//                 console.log(res);
-//                 var result = res;
-//                 var _html = "";
-//                 for (var i = 0; i < res.length; i++) {
-//                     _html += "<tr><td>" + "<input type='checkbox'/>" + "<span>" + res[i]['id'] + "</span>" + "\
-//                     </td>/<td>" + res[i]['book'] + "</td>\
-//                     <td>" + res[i]['code'] + "</td>\
-//                     <td>" + res[i]['borrower'] + "</td>\
-//                     <td>" + res[i]['contact'] + "</td>\
-//                     <td>" + res[i]['more'] + "</td>\</tr>";
-//                 }
-//                 // _html += "</table><a href='add.html'>新增图书</a>";
-//                 setTimeout(function() {
-//                     $('#list-book').html(_html);
-//                 }, 930)
-//             },
-//             error: function() {
-//                 alert("erro!");
-//             }
-//         });
-//     }
-//     loaddata();
-// });
-$(document).ready(function(){
-    alert("erro");
-}) 
+    function searchPage(setPage) { //查询页面 若输入参数为设置页面，若参数为空为查询页面
+        var getPage = document.getElementById('my-page');
+        currentPage = parseInt(getPage.value);
+        if (arguments.length == 0) {
+            return currentPage
+        }
+        currentPage = setPage;
+        return currentPage;
+    }
 
-// $(document).ready(function() {
-// 	$('tr>th').addClass('bg-info');
-// 	$('tr:even').addClass('success');
-// });
+    function compusePage(itemTotal) { //itemTotal表示数据库内容总数
+        var pageNum = searchPage(); //从Ajax获取数据库内容 searchPage参数需要增加获取的值;
+        var result = itemTotal / pageNum;
+        //searchPage(); //查询当前设置页数
+        if (itemTotal % pageNum !== 0) {
+            result = result + 1;
+        }
+        if (result <= 1) {
+            pageNum = 1;
+        }
+        pageNum = parseInt(result, 10);
+        console.log('当前分页数为:' + '' + pageNum);
+    }
+
+    function loaddata() {
+        $.ajax({
+            url: 'data/index.php',
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            success: function(res) {
+                alert('数据导入成功!')
+                console.log('数据载入成功!');
+                var Pages = searchPage();//获取当前页数
+                list(Pages, res);//显示数据库
+            },
+            error: function() {
+                alert("数据导入失败，请检查数据库是否正确连接或index.html文件是否在服务器下运行");
+            }
+        });
+    }
+    loaddata();
+    $(document).ready(function() {
+        $('tbody').on('click', 'tr', function() {
+            $('tr>th').addClass('bg-info');
+            $('tr:even').addClass('success');
+        });
+        setTimeout(function() {
+            $('tr').trigger('click')
+        }, 10);
+    });
+    // $('select').change(function() {
+    // 	var _html = "";
+    // 	$('#list-book').html(_html);
+    // 	// alert(compusePage(total));
+
+    // });
+});
