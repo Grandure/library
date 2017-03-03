@@ -12,7 +12,7 @@ while($row = mysql_fetch_array($result))
   {
   $innerarr = array('id'=>$row['id'],'\
   					book'=>$row['booktitle'],'\
-  					codenumber'=>$row['code'],'\
+  					code'=>$row['codenumber'],'\
 					borrower'=>$row['borrower'],'\
 					tel'=>$row['tel'],'\
 					more'=>$row['more']);
