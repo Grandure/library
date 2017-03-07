@@ -34,13 +34,16 @@ var myModul = (function(m) { //创建一个模块用于存储数据库的内容
     return f;
 }());
 
-function showPage() {}
 $(document).ready(function() {
-    function list(Pages, res) { //获取数据库内容并显示出来
+    function list(Pages, res, index) { //获取数据库内容并显示出来
         var _list = ""; //存储列表临时变量
         var _page = ""; //存储页面临时变量
         var compuse;
-        for (var i = 0; i < Pages; i++) {
+        var abc = res;
+        index = index || 0;
+        myModul.setnum(abc);
+        //console.log('全部数据如下:' + myModul.getnum());
+        for (var i = index; i < Pages; i++) {
             _list += "<tr><td>" + "<input type='checkbox'/>" + "<span>" + res[i]['id'] + "</span>" + "\
                     </td>/<td>" + res[i]['book'] + "</td>\
                     <td>" + res[i]['code'] + "</td>\
@@ -49,19 +52,11 @@ $(document).ready(function() {
                     <td>" + res[i]['more'] + "</td>\</tr>";
 
         }
-        if (res.length % Pages != 0) {
-            compuse = res.length / Pages + 1;
-        } else {
-            compuse = res.length / Pages
-        }
-        if (res.length <= 1) {
-            compuse = 1;
-        }
-        compuse = parseInt(compuse, 10);
+        compuse = compusePage(res.length);
         for (var i = 1; i <= compuse; i++) {
-            $('#Nex').parent().before('<li><a href="">' + i + '</a></li>');
+            // $('#Nex').parent().html('');
+            $('#Nex').parent().before('<li><a href="" class="mybt-page">' + i + '</a></li>');
         }
-        console.log('当前数据页数为:' + ' ' + compuse);
         (function() {
 
             $('#list-book').html(_list);
@@ -69,8 +64,16 @@ $(document).ready(function() {
             $('#item-total').html('共含有' + "<span id='dataNumber'>" + res.length + '</span>' + ' ' + '条数据');
         })();
         $('#Pre').after(_page);
+        $(document).ready(function() {
+            $('tbody').on('click', 'tr', function() {
+                $('tr>th').addClass('bg-info');
+                $('tr:even').addClass('success');
+            });
+            setTimeout(function() {
+                $('tr').trigger('click')
+            }, 10);
+        });
     }
-
     function loaddata() {
         $.ajax({
             url: 'data/index.php',
