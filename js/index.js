@@ -144,7 +144,7 @@ $(document).ready(function() {
         }
         pageJump(pageNum);
     });
-    function pageJump(pageNum) {
+    function pageJump(pageNum) {//创建一个拥有跳页功能的函数
         var index //定义数据的起始位置;
         var last //定义数据的末尾位置;
         var myContent = myModul.getnum(); //获取数据库内数据;
@@ -160,7 +160,7 @@ $(document).ready(function() {
         if (final < currentPage) {
             last = index + final;
         }
-        $('.pager').children().children('.mybt-page').remove();
+        $('.pager>li').children('.mybt-page').remove();
         list(last, myContent, index);
     }
 });
