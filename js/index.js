@@ -19,6 +19,7 @@ function compusePage(itemTotal) { //itemTotal表示数据库内容总数
         pageNum = 1;
     }
     pageNum = parseInt(result, 10);
+    return pageNum;
     console.log('当前分页数为:' + '' + pageNum);
 }
 var myModul = (function(m) { //创建一个模块用于存储数据库的内容
@@ -73,6 +74,7 @@ $(document).ready(function() {
             }, 10);
         });
     }
+
     function loaddata() {
         $.ajax({
             url: 'data/index.php',
@@ -105,5 +107,27 @@ $(document).ready(function() {
         }
         list(pages, myContent);
         compusePage(total);
+    });
+    $('.pager').on('click', '.mybt-page', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        var index //定义数据的起始位置;
+        var last //定义数据的末尾位置;
+        var myContent = myModul.getnum(); //获取数据库内数据;
+        var pageNum; //获取当前页码
+        var currentPage; //获取当前页码数;
+        var total; //获取数据总数;
+        var final;
+        total = myContent.length;
+        currentPage = searchPage();
+        pageNum = parseInt($(this).text());
+        index = currentPage * (pageNum - 1);
+        last = currentPage * pageNum;
+        final = total - index;
+        if (final < currentPage) {
+            last = index + final;
+        }
+        $('.pager').children().children('.mybt-page').remove();
+        list(last, myContent, index);
     });
 });
