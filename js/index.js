@@ -115,29 +115,34 @@ $(document).ready(function() {
         list(pages, myContent);
         compusePage(total);
     });
-    $('.pager').on('click', '.mybt-page', function(event) {
+    $('.pager').on('click', '.mybt-page', function(event) {//页码切换
+        var pageNum;
         event.preventDefault();
-        /* Act on the event */
-        // var index //定义数据的起始位置;
-        // var last //定义数据的末尾位置;
-        // var myContent = myModul.getnum(); //获取数据库内数据;
-        // var pageNum; //获取当前页码
-        // var currentPage; //获取当前页码数;
-        // var total; //获取数据总数;
-        // var final;
-        // total = myContent.length;
-        // currentPage = searchPage();
         pageNum = parseInt($(this).text());
         pageJump(pageNum);
-        // myModul.setPage(pageNum);//存储当前页码数;
-        // index = currentPage * (pageNum - 1);
-        // last = currentPage * pageNum;
-        // final = total - index;
-        // if (final < currentPage) {
-        //     last = index + final;
-        // }
-        // $('.pager').children().children('.mybt-page').remove();
-        // list(last, myContent, index);
+
+    });
+    $('.pager').on('click', '#Pre', function(event) {//向前翻页
+        event.preventDefault();
+        var pageNum;
+        pageNum = myModul.getPage();
+        if(pageNum !== 1){
+            pageNum--;
+        }
+        pageJump(pageNum);
+    });
+    $('.pager').on('click', '#Nex', function(event) {//向前翻页
+        event.preventDefault();
+        var pageNum;
+        var total;
+        var pageTotal;
+        total = myModul.getnum().length;//获取数据长度;
+        pageTotal = compusePage(total);//获取页面总数
+        pageNum = myModul.getPage();
+        if(pageNum !== pageTotal){
+            pageNum++;
+        }
+        pageJump(pageNum);
     });
     function pageJump(pageNum) {
         var index //定义数据的起始位置;
