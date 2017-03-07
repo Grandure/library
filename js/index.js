@@ -22,16 +22,23 @@ function compusePage(itemTotal) { //itemTotal表示数据库内容总数
     return pageNum;
     console.log('当前分页数为:' + '' + pageNum);
 }
-var myModul = (function(m) { //创建一个模块用于存储数据库的内容
+var myModul = (function() { //创建一个模块用于存储数据库的内容
     var f = {};
     var Fnum;
+    var Fpage;
+    f.setnum = function(n) {
+        Fnum = n;
+    };
     f.getnum = function() {
         // console.log(Fnum);
         return Fnum
     };
-    f.setnum = function(n) {
-        Fnum = n;
-    };
+    f.setPage = function(p) {
+        Fpage = p;
+    }
+    f.getPage = function() {
+        return Fpage;
+    }
     return f;
 }());
 
@@ -111,16 +118,37 @@ $(document).ready(function() {
     $('.pager').on('click', '.mybt-page', function(event) {
         event.preventDefault();
         /* Act on the event */
+        // var index //定义数据的起始位置;
+        // var last //定义数据的末尾位置;
+        // var myContent = myModul.getnum(); //获取数据库内数据;
+        // var pageNum; //获取当前页码
+        // var currentPage; //获取当前页码数;
+        // var total; //获取数据总数;
+        // var final;
+        // total = myContent.length;
+        // currentPage = searchPage();
+        pageNum = parseInt($(this).text());
+        pageJump(pageNum);
+        // myModul.setPage(pageNum);//存储当前页码数;
+        // index = currentPage * (pageNum - 1);
+        // last = currentPage * pageNum;
+        // final = total - index;
+        // if (final < currentPage) {
+        //     last = index + final;
+        // }
+        // $('.pager').children().children('.mybt-page').remove();
+        // list(last, myContent, index);
+    });
+    function pageJump(pageNum) {
         var index //定义数据的起始位置;
         var last //定义数据的末尾位置;
         var myContent = myModul.getnum(); //获取数据库内数据;
-        var pageNum; //获取当前页码
         var currentPage; //获取当前页码数;
         var total; //获取数据总数;
         var final;
         total = myContent.length;
         currentPage = searchPage();
-        pageNum = parseInt($(this).text());
+        myModul.setPage(pageNum);//存储当前页码数;
         index = currentPage * (pageNum - 1);
         last = currentPage * pageNum;
         final = total - index;
@@ -129,5 +157,5 @@ $(document).ready(function() {
         }
         $('.pager').children().children('.mybt-page').remove();
         list(last, myContent, index);
-    });
+    }
 });
