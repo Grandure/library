@@ -54,7 +54,6 @@ $(document).ready(function() {
         }
         compuse = compusePage(res.length);
         for (var i = 1; i <= compuse; i++) {
-            // $('#Nex').parent().html('');
             $('#Nex').parent().before('<li><a href="" class="mybt-page">' + i + '</a></li>');
         }
         (function() {
@@ -92,13 +91,19 @@ $(document).ready(function() {
         });
     }
     loaddata();
-    $(document).ready(function() {
-        $('tbody').on('click', 'tr', function() {
-            $('tr>th').addClass('bg-info');
-            $('tr:even').addClass('success');
-        });
-        setTimeout(function() {
-            $('tr').trigger('click')
-        }, 10);
+    $('select').change(function() {
+        var _html = "";
+        $('#list-book').html(_html);
+        $('.mybt-page').remove();
+        var myContent = myModul.getnum();
+        var total = myContent.length;
+        var pages = searchPage();
+        var final;
+        final = total - pages;
+        if (final < 0) {
+            pages = total;
+        }
+        list(pages, myContent);
+        compusePage(total);
     });
 });
