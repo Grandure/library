@@ -113,8 +113,10 @@ $(document).ready(function() {
             success: function(res) {
                 // alert('数据导入成功!')
                 console.log('数据载入成功!');
-                var Pages = searchPage(); //获取当前页数
-                list(Pages, res); //显示数据库
+                var Pages = searchPage(); 
+                //获取当前页数
+                list(Pages, res); 
+                //显示数据库
             },
             error: function() {
                 alert("数据导入失败，请检查数据库是否正确连接或index.html文件是否在服务器下运行");
@@ -143,8 +145,9 @@ $(document).ready(function() {
         compusePage(total);
     });
 
-    $('.pager').on('click', '.mybt-page', function(event) { //页码切换
+    $('.pager').on('click', '.mybt-page', function(event) { 
 
+        //页码切换
         var pageNum;
 
         event.preventDefault();
