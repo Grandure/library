@@ -12,6 +12,12 @@ function searchPage(setPage) {
     return currentPage;
 }
 
+function PageNum() {
+    var getPage = document.getElementsByClassName('myInput'),
+        len = getPage.length;
+    return len;
+}
+
 function compusePage(itemTotal) {
 
     //itemTotal表示数据库内容总数
@@ -33,8 +39,8 @@ function compusePage(itemTotal) {
 var myModul = (function() {
     //创建一个模块用于存储数据库的内容
     var f = {},
-    Fnum,
-    Fpage;
+        Fnum,
+        Fpage;
 
     f.setnum = function(n) {
         Fnum = n;
@@ -52,6 +58,9 @@ var myModul = (function() {
     return f;
 }());
 
+function searchCheckbox() {
+    //创建一个查询选取input[type=checkbox]被选取的内容
+}
 $(document).ready(function() {
     function list(Pages, res, index) {
 
@@ -61,13 +70,12 @@ $(document).ready(function() {
             _page = "",
             //存储页面临时变量
             compuse,
-            abc = res;
-        index = index || 0;
+            abc = res,
+            index = index || 0;
         myModul.setnum(abc);
 
         for (var i = index; i < Pages; i++) {
-
-            _list += "<tr><td>" + "<input type='checkbox'/>" + "<span>" + res[i]['id'] + "</span>" + "\
+            _list += "<tr><td>" + "<input type='checkbox' class='myInput' />" + "<span class='itemList'>" + res[i]['id'] + "</span>" + "\
                     </td>/<td>" + res[i]['book'] + "</td>\
                     <td>" + res[i]['code'] + "</td>\
                     <td>" + res[i]['borrower'] + "</td>\
@@ -75,6 +83,19 @@ $(document).ready(function() {
                     <td>" + res[i]['more'] + "</td>\</tr>";
 
         }
+        var check = document.getElementsByClassName('myInput'),
+            len = Pages - index;
+        // console.log('每页获取数据个数: ' + len);
+        // console.log('每页初始input的value值为:' + index);
+
+        setTimeout(function() {
+                for (var i = 0; i < len; i++) {
+                    var a = (index + i + 1).toString();
+                    check[i].setAttribute('value', a);
+                    // console.log('a的值为: ' + a);
+                    }
+                }, 100);
+
 
         compuse = compusePage(res.length);
 
@@ -95,12 +116,12 @@ $(document).ready(function() {
             $('tbody').on('click', 'tr', function() {
                 $('tr>th').addClass('bg-info');
                 $('tr:even').addClass('success');
+                $('tr:odd').addClass('set-color');
             });
 
             setTimeout(function() {
                 $('tr').trigger('click')
             }, 10);
-
         });
     }
 
@@ -113,9 +134,15 @@ $(document).ready(function() {
             success: function(res) {
                 // alert('数据导入成功!')
                 console.log('数据载入成功!');
-                var Pages = searchPage(); 
+
+                var len = res.length,
+                    Pages = searchPage();
+
+                if (Pages > len) {
+                    Pages = len;
+                }
                 //获取当前页数
-                list(Pages, res); 
+                list(Pages, res);
                 //显示数据库
             },
             error: function() {
@@ -129,8 +156,8 @@ $(document).ready(function() {
     $('select').change(function() {
 
 
-        var _html = "";
-        myContent = myModul.getnum(),
+        var _html = "",
+            myContent = myModul.getnum(),
             total = myContent.length,
             pages = searchPage(),
             final;
@@ -145,7 +172,7 @@ $(document).ready(function() {
         compusePage(total);
     });
 
-    $('.pager').on('click', '.mybt-page', function(event) { 
+    $('.pager').on('click', '.mybt-page', function(event) {
 
         //页码切换
         var pageNum;
@@ -156,8 +183,8 @@ $(document).ready(function() {
 
     });
 
-    $('.pager').on('click', '#Pre', function(event) { 
-    
+    $('.pager').on('click', '#Pre', function(event) {
+
         //向前翻页
         var pageNum;
 

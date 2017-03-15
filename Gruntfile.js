@@ -23,51 +23,51 @@ module.exports = function(grunt) {
                 }
             }
         },
-        cssmin: {
-            foo: {
-                files: [{
-                    expand: true,
-                    cwd: 'dist/css',
-                    src: ['*.css', '!*.min.css]'],
-                    dest: 'dist/css',
-                    ext: '.min.css'
-                }]
-            },
-            poo: {
-                files: [{
-                    expand: true,
-                    cwd: 'dist/css',
-                    src: ['*.css', '!*.min.css]'],
-                    dest: 'dist',
-                    ext: '.min.css'
-                }]
-            }
-        },
-        sass: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: 'build/scss',
-                    src: ['*.scss'],
-                    dest: 'dist/css',
-                    ext: '.css'
-                }]
-            }
-        },
-        htmlmin: {
-            dist: { // Target
-                options: { // Target options
-                    removeComments: true,
-                    collapseWhitespace: true
-                },
-                files: { // Dictionary of files
-                    'dist/index.html': './index.html', // 'destination': 'source'
-                }
-            }
-        },
+        // cssmin: {
+        //     foo: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: 'dist/css',
+        //             src: ['*.css', '!*.min.css]'],
+        //             dest: 'dist/css',
+        //             ext: '.min.css'
+        //         }]
+        //     },
+        //     poo: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: 'dist/css',
+        //             src: ['*.css', '!*.min.css]'],
+        //             dest: 'dist',
+        //             ext: '.min.css'
+        //         }]
+        //     }
+        // },
+        // sass: {
+        //     dist: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: 'build/scss',
+        //             src: ['*.scss'],
+        //             dest: 'dist/css',
+        //             ext: '.css'
+        //         }]
+        //     }
+        // },
+        // htmlmin: {
+        //     dist: { // Target
+        //         options: { // Target options
+        //             removeComments: true,
+        //             collapseWhitespace: true
+        //         },
+        //         files: { // Dictionary of files
+        //             'dist/index.html': './index.html', // 'destination': 'source'
+        //         }
+        //     }
+        // },
         watch: {
             client: {
-                files: ['index.html', 'css/**/*.css'],
+                files: ['index.html', 'css/**/*.css','js/**/*.js'],
                 options: {
                     livereload: true
                 }
