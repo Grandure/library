@@ -73,7 +73,7 @@ $(document).ready(function() {
             abc = res,
             idArr = [],
             index = index || 0;
-        myModul.setnum(abc);
+            myModul.setnum(abc);
 
         for (var i = index; i < Pages; i++) {
             _list += "<tr><td>" + "<input type='checkbox' class='myInput' />" + "<span class='itemList'>" + res[i]['id'] + "</span>" + "\
@@ -91,8 +91,8 @@ $(document).ready(function() {
         var check = document.getElementsByClassName('myInput'),
             len = Pages - index;
 
-            //设置初始页码为第一页
-            myModul.setPage(1);
+        //设置初始页码为第一页
+        myModul.setPage(1);
 
         setTimeout(function() {
 
@@ -280,24 +280,26 @@ $(document).ready(function() {
         list(last, myContent, index);
     }
     $('#del-data').click(function(event) {
-        //删除功能
-        event.preventDefault();
-        //阻止默认事件
-        var myInput = document.getElementsByClassName('myInput'),
-            arr = [],
-            check,
-            obj;
+            //删除功能
+            event.preventDefault();
+            //阻止默认事件
+            var myInput = document.getElementsByClassName('myInput'),
+                arr = [],
+                check,
+                obj,
+                _id;
 
-        for (obj in myInput) {
+            for (obj in myInput) {
 
-            if (myInput[obj].checked) {
-                //判断如果input-check被选中，则将其value值存入arr数组中
-                arr.push(myInput[obj].value);
+                if (myInput[obj].checked) {
+                    //判断如果input-check被选中，则将其value值存入arr数组中
+                    arr.push(myInput[obj].value);
+                }
             }
+            //取得被选中的input[type=check]值
+            _id = arr;
         }
-        var _id = arr;
-        console.log(arr);
-        $.ajax({
+        console.log(arr); $.ajax({
             url: 'data/delete.php',
             type: 'get',
             dataType: 'json',
@@ -313,9 +315,9 @@ $(document).ready(function() {
                 }
 
                 var myInput = document.getElementsByClassName('myInput'),
-                    arr = [];
-                check,
-                obj;
+                    arr = [],
+                    check,
+                    obj;
 
                 //重新加载页面
                 loaddata();
