@@ -25,4 +25,8 @@ $(document).ready(function() {
             }
         });
     });
+    $('#res').click(function() {
+        alert('取消当前操作,返回借书列表')
+        document.location.href = 'index.html';
+    });
 });
