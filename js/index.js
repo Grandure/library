@@ -71,6 +71,7 @@ $(document).ready(function() {
             //存储页面临时变量
             compuse,
             abc = res,
+            idArr=[],
             index = index || 0;
         myModul.setnum(abc);
 
@@ -82,19 +83,21 @@ $(document).ready(function() {
                     <td>" + res[i]['tel'] + "</td>\
                     <td>" + res[i]['more'] + "</td>\</tr>";
 
+                    //获取数据库中的ID值，将其存入idArr中
+                    idArr.push(res[i]['id']);
+
         }
         var check = document.getElementsByClassName('myInput'),
             len = Pages - index;
-        // console.log('每页获取数据个数: ' + len);
-        // console.log('每页初始input的value值为:' + index);
 
         setTimeout(function() {
-                for (var i = 0; i < len; i++) {
-                    var a = (index + i + 1).toString();
-                    check[i].setAttribute('value', a);
-                    // console.log('a的值为: ' + a);
-                    }
-                }, 100);
+
+        //延时，待表格内容创建完成时向input[type=checkbox]中添加与id对应的属性值
+            for (var i = 0; i < idArr.length; i++) {
+                check[i].setAttribute('value', idArr[i]);
+                
+            }
+        }, 100);
 
 
         compuse = compusePage(res.length);
@@ -246,4 +249,67 @@ $(document).ready(function() {
         $('.pager>li').children('.mybt-page').remove();
         list(last, myContent, index);
     }
+    $('#del-data').click(function(event) {
+        //删除功能
+        event.preventDefault();
+        //组织默认事件
+        var myInput = document.getElementsByClassName('myInput'),
+            arr = [],
+            check,
+            obj;
+
+        for (obj in myInput) {
+
+            if (myInput[obj].checked) {
+                //判断如果input-check被选中，则将其value值存入arr数组中
+                arr.push(myInput[obj].value);
+            }
+        }
+        var _id = arr;
+        console.log(arr);
+        $.ajax({
+            url: 'data/delete.php',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                id: _id
+            },
+            success: function(res) {
+
+                // console.log("删除成功");
+                if(res.status == 'ok'){
+                    alert(res.status);
+                }
+                else{
+                    console.log('删除失败');
+                    console.log(res.status);
+                }
+                // var _html = "",
+                // $('#list-book').html(_html);
+                $('.pager>li').children('.mybt-page').remove();
+                loaddata();
+                // var myInput = document.getElementsByClassName('myInput'),
+                //         arr = []; 
+                //         check,
+                //         obj;
+
+                // for (obj in myInput) {
+
+                //     if(myInput[obj].checked){
+                //     //判断如果input-check被选中，则将其value值存入arr数组中
+                //         arr.push(myInput[obj].checked.value);
+                //     }
+                // }
+                // console.log(arr);
+
+            },
+            error: function(erro) {
+                console.log('删除失败');
+            }
+        });
+    });
 });
+
+function compuseCheck() {
+
+}
