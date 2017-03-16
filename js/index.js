@@ -71,7 +71,7 @@ $(document).ready(function() {
             //存储页面临时变量
             compuse,
             abc = res,
-            idArr=[],
+            idArr = [],
             index = index || 0;
         myModul.setnum(abc);
 
@@ -83,19 +83,20 @@ $(document).ready(function() {
                     <td>" + res[i]['tel'] + "</td>\
                     <td>" + res[i]['more'] + "</td>\</tr>";
 
-                    //获取数据库中的ID值，将其存入idArr中
-                    idArr.push(res[i]['id']);
+            //获取数据库中的ID值，将其存入idArr中
+            idArr.push(res[i]['id']);
 
         }
+        i = null;
         var check = document.getElementsByClassName('myInput'),
             len = Pages - index;
 
         setTimeout(function() {
 
-        //延时，待表格内容创建完成时向input[type=checkbox]中添加与id对应的属性值
+            //延时，待表格内容创建完成时向input[type=checkbox]中添加与id对应的属性值
             for (var i = 0; i < idArr.length; i++) {
                 check[i].setAttribute('value', idArr[i]);
-                
+
             }
         }, 100);
 
@@ -105,7 +106,7 @@ $(document).ready(function() {
         for (var i = 1; i <= compuse; i++) {
             $('#Nex').parent().before('<li><a href="" class="mybt-page">' + i + '</a></li>');
         }
-
+        i = null;
         (function() {
 
             $('#list-book').html(_list);
@@ -129,6 +130,7 @@ $(document).ready(function() {
     }
 
     function loaddata() {
+        //加载数据库内容
         $.ajax({
             url: 'data/index.php',
             type: 'get',
@@ -137,6 +139,7 @@ $(document).ready(function() {
             success: function(res) {
                 // alert('数据导入成功!')
                 console.log('数据载入成功!');
+                $('.pager>li').children('.mybt-page').remove();
 
                 var len = res.length,
                     Pages = searchPage();
@@ -220,6 +223,30 @@ $(document).ready(function() {
         pageJump(pageNum);
     });
 
+    $('#select-all').click(function(event) {
+
+        var counter,
+            bool,
+            inputCheck = $('.myInput'),
+            length = inputCheck.length,
+            result = false;
+
+        for (var i = 0; i < length; i++) {
+
+            result += inputCheck[i].checked;
+        }
+        bool = false;
+        if (result === 0) {
+            bool = true;
+        }
+
+        event.preventDefault();
+        for (var i = 0; i < length; i++) {
+            $('.myInput')[i].checked = bool;
+        }
+
+    });
+
     function pageJump(pageNum) {
 
         //创建一个拥有跳页功能的函数
@@ -276,40 +303,31 @@ $(document).ready(function() {
             },
             success: function(res) {
 
-                // console.log("删除成功");
-                if(res.status == 'ok'){
-                    alert(res.status);
+                if (res.status == 'ok') {
+                    alert('删除成功');
+                } else {
+                    alert('删除失败')
                 }
-                else{
-                    console.log('删除失败');
-                    console.log(res.status);
-                }
-                // var _html = "",
-                // $('#list-book').html(_html);
-                $('.pager>li').children('.mybt-page').remove();
+
                 loaddata();
-                // var myInput = document.getElementsByClassName('myInput'),
-                //         arr = []; 
-                //         check,
-                //         obj;
+                var myInput = document.getElementsByClassName('myInput'),
+                    arr = [];
+                check,
+                obj;
 
-                // for (obj in myInput) {
+                for (obj in myInput) {
 
-                //     if(myInput[obj].checked){
-                //     //判断如果input-check被选中，则将其value值存入arr数组中
-                //         arr.push(myInput[obj].checked.value);
-                //     }
-                // }
-                // console.log(arr);
+                    if (myInput[obj].checked) {
+                        //判断如果input-check被选中，则将其value值存入arr数组中
+                        arr.push(myInput[obj].checked.value);
+                    }
+                }
+                console.log(arr);
 
             },
             error: function(erro) {
-                console.log('删除失败');
+                alert('删除失败,请检查删除数据或delete.php文件');
             }
         });
     });
 });
-
-function compuseCheck() {
-
-}
