@@ -224,7 +224,7 @@ $(document).ready(function() {
     });
 
     $('#select-all').click(function(event) {
-
+        //设置全选按钮功能
         var counter,
             bool,
             inputCheck = $('.myInput'),
@@ -279,7 +279,7 @@ $(document).ready(function() {
     $('#del-data').click(function(event) {
         //删除功能
         event.preventDefault();
-        //组织默认事件
+        //阻止默认事件
         var myInput = document.getElementsByClassName('myInput'),
             arr = [],
             check,
@@ -309,20 +309,13 @@ $(document).ready(function() {
                     alert('删除失败')
                 }
 
-                loaddata();
                 var myInput = document.getElementsByClassName('myInput'),
                     arr = [];
-                check,
-                obj;
+                    check,
+                    obj;
 
-                for (obj in myInput) {
-
-                    if (myInput[obj].checked) {
-                        //判断如果input-check被选中，则将其value值存入arr数组中
-                        arr.push(myInput[obj].checked.value);
-                    }
-                }
-                console.log(arr);
+                //重新加载页面
+                loaddata();
 
             },
             error: function(erro) {
