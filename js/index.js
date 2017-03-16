@@ -91,6 +91,9 @@ $(document).ready(function() {
         var check = document.getElementsByClassName('myInput'),
             len = Pages - index;
 
+            //设置初始页码为第一页
+            myModul.setPage(1);
+
         setTimeout(function() {
 
             //延时，待表格内容创建完成时向input[type=checkbox]中添加与id对应的属性值
@@ -311,8 +314,8 @@ $(document).ready(function() {
 
                 var myInput = document.getElementsByClassName('myInput'),
                     arr = [];
-                    check,
-                    obj;
+                check,
+                obj;
 
                 //重新加载页面
                 loaddata();
